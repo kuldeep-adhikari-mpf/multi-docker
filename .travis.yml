@@ -6,17 +6,17 @@ before_install:
   - docker build -t kuldeepadhikarimpf/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run kuldeepadhikarimpf/react-test npm run test -- --coverage
+  - docker run kuldeepadhikarimpf/react-test npm test -- --coverage
 
 after_success:
   - docker build -t kuldeepadhikarimpf/multi-client ./client
   - docker build -t kuldeepadhikarimpf/multi-nginx ./nginx
   - docker build -t kuldeepadhikarimpf/multi-server ./server
   - docker build -t kuldeepadhikarimpf/multi-worker ./worker
-# Log in to the docker CLI
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-# Take those images and push them to docker hub
-- docker push kuldeepadhikarimpf/multi-client
-- docker push kuldeepadhikarimpf/multi-nginx
-- docker push kuldeepadhikarimpf/multi-server
-- docker push kuldeepadhikarimpf/multi-worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push kuldeepadhikarimpf/multi-client
+  - docker push kuldeepadhikarimpf/multi-nginx
+  - docker push kuldeepadhikarimpf/multi-server
+  - docker push kuldeepadhikarimpf/multi-worker
